@@ -27,4 +27,5 @@ Route::controller(PageController::class)->group(function () {
     Route::get('question/{id}', 'question')->name('page.question')->middleware(['auth:sanctum', 'verified']);    
     Route::get('option/{id}', 'option')->name('page.option')->middleware(['auth:sanctum', 'verified']);
     Route::get('event', 'event')->name('page.event')->middleware(['auth:sanctum', 'verified']);
+    Route::get('user', 'user')->name('page.user')->middleware(['auth:sanctum', 'verified']);
 });

@@ -20,5 +20,7 @@ class UserSeeder extends Seeder
         $user->email = "admin@ajatic.com";
         $user->password = bcrypt("123456789");
         $user->save();
+
+        $user->assignRole('admin');
     }
 }

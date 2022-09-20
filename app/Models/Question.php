@@ -22,6 +22,11 @@ class Question extends Model
         return $this->hasMany(Option::class);
     }
 
+    public function specials()
+    {
+        return $this->hasMany(Special::class);
+    }
+
     public function type()
     {
         return $this->belongsTo(Type::class);

@@ -59,5 +59,10 @@ class TypeSeeder extends Seeder
         $new_type->name = "Firma";
         $new_type->features = false;
         $new_type->save();
+
+        $new_type = new Type();
+        $new_type->name = "Seleccion especial";
+        $new_type->features = false;
+        $new_type->save();
     }
 }

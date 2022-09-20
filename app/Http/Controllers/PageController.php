@@ -30,4 +30,9 @@ class PageController extends Controller
     {
         return view('pages.event');
     }
+
+    public function user()
+    {
+        return view('pages.user');
+    }
 }
