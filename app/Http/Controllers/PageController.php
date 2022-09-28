@@ -35,4 +35,10 @@ class PageController extends Controller
     {
         return view('pages.user');
     }
+
+    public function special($id)
+    {
+        $question = Question::find($id);
+        return view('pages.special', compact('question'));
+    }
 }

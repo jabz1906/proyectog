@@ -62,7 +62,7 @@ class TypeSeeder extends Seeder
 
         $new_type = new Type();
         $new_type->name = "Seleccion especial";
-        $new_type->features = false;
+        $new_type->features = true;
         $new_type->save();
     }
 }

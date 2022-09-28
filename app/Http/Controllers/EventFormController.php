@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Form;
 use App\Models\Option;
 use App\Models\Question;
+use App\Models\Special;
 use Illuminate\Http\Request;
 
 class EventFormController extends Controller
@@ -16,8 +17,16 @@ class EventFormController extends Controller
         $questions = Question::where('form_id', $form->id)->where('status', 1)->orderBy('order', 'ASC')->get();
         $form->questions = $questions;
         foreach ($form->questions as $question) {
-            $options = Option::where('question_id', $question->id)->where('status', 1)->orderBy('order', 'ASC')->get();
-            $question->options = $options;
+            if ($question->type_id != 10) {
+                $options = Option::where('question_id', $question->id)->where('status', 1)->orderBy('order', 'ASC')->get();
+                $question->options = $options;
+            } 
+
+            if ($question->type_id == 10) {
+                $special = Special::where('question_id', $question->id)->where('status', 1)->first();
+                $options = Answer::select('id', 'input_data')->where('question_id', $special->data_id)->get();
+                $question->options = $options;
+            }
         }
 
         return response()->json([
@@ -29,7 +38,7 @@ class EventFormController extends Controller
     public function save(Request $request)
     {
         $event = new Event();
-        if($request->parent_id == 0){
+        if ($request->parent_id == 0) {
             $event->parent_id = null;
         } else {
             $event->parent_id = $request->parent_id;
@@ -37,13 +46,13 @@ class EventFormController extends Controller
             $eventParent->status = Event::Finalized;
             $eventParent->save();
         }
-        
+
         $event->form_id = $request->form_id;
         $event->user_id = $request->user_id;
         $event->registered = $request->registered;
 
         $form = Form::find($request->form_id);
-        if(!$form->forms) {
+        if (!$form->forms) {
             $event->status = Event::Finalized;
         }
 
@@ -76,7 +85,7 @@ class EventFormController extends Controller
             }
 
             $register->save();
-        }        
+        }
 
         return response()->json([
             'code' => 200,

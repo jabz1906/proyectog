@@ -36,4 +36,9 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class);
     }
+
+    public function data()
+    {
+        return $this->hasMany(Special::class, 'data_id');
+    }
 }

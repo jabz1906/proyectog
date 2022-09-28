@@ -16,4 +16,9 @@ class Special extends Model
     {
         return $this->belongsTo(Question::class);
     }
+
+    public function data()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }

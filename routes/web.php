@@ -28,4 +28,5 @@ Route::controller(PageController::class)->group(function () {
     Route::get('option/{id}', 'option')->name('page.option')->middleware(['auth:sanctum', 'verified']);
     Route::get('event', 'event')->name('page.event')->middleware(['auth:sanctum', 'verified']);
     Route::get('user', 'user')->name('page.user')->middleware(['auth:sanctum', 'verified']);
+    Route::get('special/{id}', 'special')->name('page.special')->middleware(['auth:sanctum', 'verified']);
 });
