@@ -143,6 +143,7 @@ return [
         'image' => 'imagen',
         'type_id' => 'tipo',
         'mandatory' => 'obligatorio',
-        'order' => 'orden'
+        'order' => 'orden',
+        'role' =>  'rol'
     ],
 ];
