@@ -12,7 +12,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::where('status', Event::Active)->orderBy('id', 'DESC')->get();
+        $events = Event::orderBy('id', 'DESC')->get();
         foreach ($events as $event) {
             $form = Form::find($event->form_id);
             $user = User::find($event->user_id);
