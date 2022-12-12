@@ -1,9 +1,9 @@
 <div>
     <x-template-form>
         <x-slot name='search'>
-            <x-jet-input id="search" type="text" class="mt-1 block w-full" wire:model='search' placeholder="Buscar..." />
-            <button wire:click='resetSearch'
-                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <x-jet-input id="search" type="text" class="mt-1 block w-full" wire:model='search'
+                placeholder="Buscar..." />
+            <button wire:click='resetSearch' class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Reiniciar
             </button>
         </x-slot>
@@ -119,18 +119,23 @@
                                     </a>
                                 </x-tooltip>
                                 @if ($question->type->features == true)
+                                @if ($question->type->id != 10)
                                     <x-tooltip tooltip="Opciones">
                                         <a href="{{ route('page.option', $question->id) }}" class="cursor-pointer">
                                             <x-fas-arrow-alt-circle-right
                                                 class="w-6 h-6 text-blue-500 hover:text-gray-100" />
                                         </a>
                                     </x-tooltip>
-                                    <x-tooltip tooltip="Opciones Especiales">
-                                        <a href="{{ route('page.special', $question->id) }}" class="cursor-pointer">
-                                            <x-fas-arrow-alt-circle-right
-                                                class="w-6 h-6 text-orange-500 hover:text-gray-100" />
-                                        </a>
-                                    </x-tooltip>
+                                    @endif
+                                    @if ($question->type->id == 10)
+                                        <x-tooltip tooltip="Opciones Especiales">
+                                            <a href="{{ route('page.special', $question->id) }}"
+                                                class="cursor-pointer">
+                                                <x-fas-arrow-alt-circle-right
+                                                    class="w-6 h-6 text-orange-500 hover:text-gray-100" />
+                                            </a>
+                                        </x-tooltip>
+                                    @endif
                                 @endif
                             </td>
                         </tr>

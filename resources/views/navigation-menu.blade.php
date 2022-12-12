@@ -6,8 +6,8 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                         <!--<x-jet-application-mark class="block h-9 w-auto" />-->
-                         <img class="h-16 w-16" src="storage/logo.svg">
+                        <!--<x-jet-application-mark class="block h-9 w-auto" />-->
+                        <img src="{{ Storage::url('logo.svg') }}" alt="" class="h-16 w-16">
                     </a>
                 </div>
 

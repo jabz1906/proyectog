@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Event;
+use App\Models\Form;
+use App\Models\Question;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +16,14 @@ class ComponentEvent extends Component
 
     public $search;
 
+    public $form_id;
+    public $question_id;
+    public $textSearch;
+
     public $deleteModal;
+
+    public $forms;
+    public $questions;
 
     protected $queryString = [
         'search' => ['except' => '']
@@ -23,18 +32,44 @@ class ComponentEvent extends Component
     public function mount()
     {
         $this->deleteModal = false;
+        $this->form_id = null;
+        $this->question_id = null;
+        $this->forms = Form::where('status', Form::Active)->get();
+        $this->questions = collect();
     }
 
     public function render()
     {
         $Query = Event::query();
+
         if ($this->search != null) {
             $this->updatingSearch();
-            $Query = $Query->whereHas('form', function (Builder $query) {
+            /*$Query = $Query->whereHas('form', function (Builder $query) {
                 $query->where('name', 'like', '%' . $this->search . '%');
+            });*/
+            $Query = $Query->where('id', 'like', '%' . $this->search . '%');
+        }
+
+        if ($this->form_id != null) {
+            $Query = $Query->where('form_id', $this->form_id);
+            $this->questions = Question::where('form_id', $this->form_id)
+            ->where('type_id', 3)->orWhere('type_id', 4)->orWhere('type_id', 6)->orWhere('type_id', 7)->get();
+        }
+
+        if ($this->question_id != null) {
+            $Query = $Query->whereHas('answers', function (Builder $query) {
+                $query->where('question_id', $this->question_id);
             });
         }
-        $events = $Query->orderBy('id', 'DESC')->paginate(7);
+
+        if ($this->textSearch != null)
+        {
+            $Query = $Query->whereHas('answers', function (Builder $query) {
+                $query->where('input_data', 'like', '%' . $this->textSearch . '%');
+            });
+        }
+
+        $events = $Query->where('status', Event::Active)->orderBy('id', 'DESC')->paginate(7);
         return view('livewire.component-event', compact('events'));
     }
 
@@ -67,7 +102,7 @@ class ComponentEvent extends Component
 
     public function resetSearch()
     {
-        $this->reset(['search']);
+        $this->reset(['search', 'form_id', 'question_id', 'textSearch']);
         $this->updatingSearch();
     }
 

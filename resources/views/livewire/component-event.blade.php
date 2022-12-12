@@ -1,14 +1,52 @@
 <div>
     <x-template-form>
         <x-slot name='search'>
-            <x-jet-input id="search" type="text" class="mt-1 block w-full" wire:model='search' placeholder="Buscar..." />
-            <button wire:click='resetSearch'
-                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <x-jet-input id="search" type="text" class="mt-1 block w-full" wire:model='search'
+                placeholder="Buscar..." />
+            <button wire:click='resetSearch' class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Reiniciar
             </button>
         </x-slot>
         <x-slot name='form'>
+            <div class="m-2">
+                <x-jet-label for="form_id" value="Depende del Formulario" />
+                <select id="form_id" wire:model="form_id"
+                    class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                    <option value="">Seleccione un opcion</option>
+                    @foreach ($forms as $form)
+                        <option value="{{ $form->id }}">{{ $form->name }}</option>
+                    @endforeach
+                </select>
+                <x-jet-input-error for="form_id" class="mt-2" />
+            </div>
 
+            @if ($form_id != null)
+                <div class="m-2">
+                    <x-jet-label for="question_id" value="Depende del Formulario" />
+                    <select id="question_id" wire:model="question_id"
+                        class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                        <option value="">Seleccione un opcion</option>
+                        @foreach ($questions as $question)
+                            <option value="{{ $question->id }}">{{ $question->name }}</option>
+                        @endforeach
+                    </select>
+                    <x-jet-input-error for="question_id" class="mt-2" />
+                </div>
+            @endif
+
+            @if ($question_id != null)
+                <div class="m-2">
+                    <x-jet-label for="textSearch" value="Nombre de la Formulario" />
+                    <x-jet-input id="textSearch" type="text" class="mt-1 block w-full" wire:model='textSearch' />
+                    <x-jet-input-error for="textSearch" class="mt-2" />
+                </div>
+            @endif
+
+            <div class="m-2">
+                <x-jet-danger-button wire:click="resetSearch">
+                    Cancelar
+                </x-jet-danger-button>
+            </div>
         </x-slot>
         <x-slot name='table'>
             <table class="table w-full text-gray-400 border-separate space-y-6 text-sm">
@@ -17,6 +55,7 @@
                         <th class="p-3 text-left">Id</th>
                         <th class="p-3 text-left">Formulario</th>
                         <th class="p-3 text-left">Usuario</th>
+                        <th class="p-3 text-left">Fecha</th>
                         <th class="p-3 text-left">Acciones</th>
                     </tr>
                 </thead>
@@ -31,6 +70,9 @@
                             </td>
                             <td class="p-3 ">
                                 {{ $event->user->name }}
+                            </td>
+                            <td class="p-3 ">
+                                {{ $event->created_at }}
                             </td>
                             <td class="p-3 flex gap-1 items-center">
                                 <x-tooltip tooltip="Eliminar">

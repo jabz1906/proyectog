@@ -20,7 +20,7 @@ class EventFormController extends Controller
             if ($question->type_id != 10) {
                 $options = Option::where('question_id', $question->id)->where('status', 1)->orderBy('order', 'ASC')->get();
                 $question->options = $options;
-            } 
+            }
 
             if ($question->type_id == 10) {
                 $special = Special::where('question_id', $question->id)->where('status', 1)->first();
