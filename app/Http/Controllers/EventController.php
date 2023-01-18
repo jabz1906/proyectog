@@ -37,7 +37,12 @@ class EventController extends Controller
         $event->form_name = $form->name;
         $event->form_description = $form->description;
 
-        $event->form_parent_id = $form->forms->first()->id;
+        if ($form->forms->count() > 0)
+        {
+                $event->form_child = 1;
+        } else {
+                $event->form_child = 0;
+        }
 
         $answers = Answer::where('event_id', $event->id)->get();
 
@@ -72,6 +77,10 @@ class EventController extends Controller
                             }
                             if ($question->type->id == 9) {
                                 $question->answer = $answer->media_file;
+                            }
+                            if ($question->type->id == 10) {
+                                $data = Answer::find($answer->input_data);
+                                $question->answer = $data->input_data;
                             }
                         }
                     }

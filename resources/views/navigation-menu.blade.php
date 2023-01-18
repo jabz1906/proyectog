@@ -28,6 +28,9 @@
                         <x-jet-nav-link href="{{ route('page.event') }}" :active="request()->routeIs('page.event')">
                             Evento
                         </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('page.calendar') }}" :active="request()->routeIs('page.calendar')">
+                            Calendario
+                        </x-jet-nav-link>
                     @endrole
                 </div>
             </div>
@@ -179,6 +182,9 @@
                 </x-jet-responsive-nav-link>
                 <x-jet-responsive-nav-link href="{{ route('page.event') }}" :active="request()->routeIs('page.event')">
                     Evento
+                </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('page.calendar') }}" :active="request()->routeIs('page.calendar')">
+                    Calendario
                 </x-jet-responsive-nav-link>
             @endrole
         </div>

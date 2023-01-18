@@ -21,6 +21,11 @@
         "tailwindcss": "^3.0.0"
     },
     "dependencies": {
+        "@fullcalendar/core": "^6.0.1",
+        "@fullcalendar/daygrid": "^6.0.1",
+        "@fullcalendar/interaction": "^6.0.1",
+        "@fullcalendar/list": "^6.0.1",
+        "@fullcalendar/timegrid": "^6.0.1",
         "jquery": "^3.6.0",
         "toastr": "^2.1.4",
         "zoom-vanilla.js": "^2.0.6"

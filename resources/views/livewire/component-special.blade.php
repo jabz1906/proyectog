@@ -70,7 +70,7 @@
             <table class="table w-full text-gray-400 border-separate space-y-6 text-sm">
                 <thead class="bg-blue-500 text-white">
                     <tr class="uppercase">
-                        <th class="p-3 text-left">Id</th>
+                        <th class="p-3 text-left">Pregunta</th>
                         <th class="p-3 text-left">Lista</th>
                         <th class="p-3 text-left">Acciones</th>
                     </tr>
@@ -79,7 +79,7 @@
                     @foreach ($specials as $special)
                         <tr class="bg-blue-200 text-black">
                             <td class="p-3 ">
-                                {{ $special->id }}
+                                {{ $special->question->name }}
                             </td>
                             <td class="p-3 ">
                                {{ $special->data->form->name }} -> {{ $special->data->name }}

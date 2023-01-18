@@ -62,7 +62,7 @@ class ComponentSpecial extends Component
         }
 
         $Query = Special::query();
-        $specials = $Query->where('status', Special::Active)->orderBy('id', 'ASC')->paginate(7);
+        $specials = $Query->where('question_id', $this->question_id)->where('status', Special::Active)->orderBy('id', 'ASC')->paginate(7);
         return view('livewire.component-special', compact('forms', 'questions', 'specials'));
     }
 

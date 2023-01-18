@@ -32,7 +32,8 @@ class FormController extends Controller
     {
         return response()->json([
             'code' => 200,
-            'data' => $form
+            'data' => $form,
+            'child' => $form->forms
         ], 200);
     }
 

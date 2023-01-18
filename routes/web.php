@@ -29,4 +29,5 @@ Route::controller(PageController::class)->group(function () {
     Route::get('event', 'event')->name('page.event')->middleware(['auth:sanctum', 'verified']);
     Route::get('user', 'user')->name('page.user')->middleware(['auth:sanctum', 'verified']);
     Route::get('special/{id}', 'special')->name('page.special')->middleware(['auth:sanctum', 'verified']);
+    Route::get('calendar', 'calendar')->name('page.calendar')->middleware(['auth:sanctum', 'verified']);
 });

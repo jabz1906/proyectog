@@ -41,4 +41,9 @@ class PageController extends Controller
         $question = Question::find($id);
         return view('pages.special', compact('question'));
     }
+
+    public function calendar()
+    {
+        return view('pages.calendar');
+    }
 }
