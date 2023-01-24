@@ -30,10 +30,17 @@ class FormController extends Controller
 
     public function show(Form $form)
     {
+        $forms = $form->forms;
+
+        foreach($forms as $form)
+        {
+            $form->image = base64_encode(Storage::get($form->image));
+        }
+
         return response()->json([
             'code' => 200,
             'data' => $form,
-            'child' => $form->forms
+            'child' => $forms
         ], 200);
     }
 

@@ -13,6 +13,7 @@ class AuthController extends Controller
             $token->delete();
         });
         return response()->json([
+            'code' => 200,
             'message' => 'Successfully logged out'
         ], 200);
     }

@@ -96,11 +96,23 @@ class EventController extends Controller
 
     public function update(Request $request, Event $event)
     {
-        //
+        $event->status = Event::Finalized;
+        $event->save();
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Successfully finalize event'
+        ], 200);
     }
 
     public function destroy(Event $event)
     {
-        //
+        $event->status = Event::Inactive;
+        $event->save();
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Successfully inactive event'
+        ], 200);
     }
 }

@@ -42,20 +42,11 @@ class EventFormController extends Controller
             $event->parent_id = null;
         } else {
             $event->parent_id = $request->parent_id;
-            $eventParent = Event::find($request->parent_id);
-            $eventParent->status = Event::Finalized;
-            $eventParent->save();
         }
 
         $event->form_id = $request->form_id;
-        $event->user_id = $request->user_id;
+        $event->user_id = $request->user_id;     
         $event->registered = $request->registered;
-
-        $form = Form::find($request->form_id);
-        if (!$form->forms) {
-            $event->status = Event::Finalized;
-        }
-
         $event->save();
 
         $answers = $request->answers;

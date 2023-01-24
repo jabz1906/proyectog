@@ -56,6 +56,7 @@
                         <th class="p-3 text-left">Formulario</th>
                         <th class="p-3 text-left">Usuario</th>
                         <th class="p-3 text-left">Fecha</th>
+                        <th class="p-3 text-left">Estado</th>
                         <th class="p-3 text-left">Acciones</th>
                     </tr>
                 </thead>
@@ -73,6 +74,14 @@
                             </td>
                             <td class="p-3 ">
                                 {{ $event->created_at }}
+                            </td>
+                            <td class="p-3 ">
+                                @if ($event->status == 1)
+                                    <h1>Activo</h1>
+                                @endif
+                                @if ($event->status == 3)
+                                    <h1>Finalizar</h1>
+                                @endif
                             </td>
                             <td class="p-3 flex gap-1 items-center">
                                 <x-tooltip tooltip="Eliminar">
