@@ -59,7 +59,7 @@
                             @else
                                 @php
                                     $base64 = 'data:image/jpeg;base64,' . $answer->media_file;
-                                    echo '<img src="' . $base64 . '" width="200" height="120">';
+                                    echo '<img src="' . $base64 . '" width="290" height="350">';
                                 @endphp
                             @endif
                         @endif
